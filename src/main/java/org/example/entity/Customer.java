@@ -1,21 +1,28 @@
 package org.example.entity;
 
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
+@Table(name="customers")
 public class Customer {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String address;
     private String city;
+    @Column(name = "company_name")
     private String companyName;
     private String country;
     private String email;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name="last_name")
     private String lastName;
     private String phone;
+    @Column(name="zip_code")
     private String zipCode;
     private int state;
 
