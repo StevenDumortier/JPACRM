@@ -5,6 +5,8 @@ import org.example.jpa.EntityManagerSingleton;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import java.util.List;
 
 public class CustomerDAO {
 
@@ -22,5 +24,10 @@ public class CustomerDAO {
         Customer customer = entityManager.find(Customer.class, id);
         return customer;
 
+    }
+    public static List<Customer> findAll() {
+        EntityManager entityManager = EntityManagerSingleton.getEntityManager();
+        Query findAllQuery = entityManager.createQuery("select c from Customer c");
+        return findAllQuery.getResultList();
     }
 }
