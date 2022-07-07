@@ -30,4 +30,34 @@ public class CustomerDAO {
         Query findAllQuery = entityManager.createQuery("select c from Customer c");
         return findAllQuery.getResultList();
     }
+    public static void delete(Customer customer) {
+        EntityManager entityManager = EntityManagerSingleton.getEntityManager();
+
+        EntityTransaction tx = entityManager.getTransaction();
+        tx.begin();
+        entityManager.remove(customer);
+        tx.commit();
+    }
+    public static void deleteCustomerById(long id) {
+        //EntityManager entityManager = EntityManagerSingleton.getEntityManager();
+        //Customer customer = entityManager.find(Customer.class, id);
+        //EntityTransaction tx = entityManager.getTransaction();
+        //tx.begin();
+        //entityManager.remove(customer);
+        //tx.commit();
+        Customer customerToDelete = findById(id); //on utilise les fonctions au dessus donc pas besoin de faire transaction et entitymanager
+        delete(customerToDelete);
+    }
+//    public static void deleteCustomerByidV2(long id) {
+//        EntityManager entityManager = EntityManagerSingleton.getEntityManager();
+//        EntityTransaction tx = entityManager.getTransaction();
+//        tx.begin();
+//        Query deleteQuery = entityManager.createQuery("delete from Customer c where c.id");
+//        deleteQuery.setParameter(1,id);
+//        deleteQuery.executeUpdate();
+//        tx.commit();
+//
+//
+//
+//    }
 }
