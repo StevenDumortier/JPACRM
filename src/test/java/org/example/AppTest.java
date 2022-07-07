@@ -8,20 +8,21 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class AppTest {
-
+public class AppTest
+{
     @Test
-    public void createCustomer() {
+    public void createCustomer()
+    {
         Customer customer = new Customer();
         customer.setFirstName("Alain");
         customer.setLastName("Delon");
         CustomerDAO.create(customer);
 
-        assertTrue(true);
+        assertTrue( true );
     }
 
     @Test
-    public void findById() {
+    public void findById(){
         Customer customer = new Customer();
         customer.setFirstName("Alain");
         customer.setLastName("Delon");
@@ -29,7 +30,6 @@ public class AppTest {
 
         Customer customer1 = CustomerDAO.findById(customer.getId());
         assertEquals("Alain", customer1.getFirstName());
-
     }
 
     @Test
@@ -50,15 +50,16 @@ public class AppTest {
     }
 
     @Test
-    public void deleteCustomer() {
+    public void deleteCustomer(){
         Customer marie = new Customer("Marie");
         CustomerDAO.create(marie);
 
-        List<Customer> customers1 = CustomerDAO.findAll();
-        assertEquals(1, customers1.size());
+        List<Customer> customers = CustomerDAO.findAll();
+        assertEquals(1, customers.size());
 
         CustomerDAO.delete(marie);
-        List<Customer> customers = CustomerDAO.findAll();
+
+        customers = CustomerDAO.findAll();
         assertEquals(0, customers.size());
     }
 
@@ -76,9 +77,8 @@ public class AppTest {
         assertNull(CustomerDAO.findById(michel.getId()));
         assertNotNull(CustomerDAO.findById(marie.getId()));
         assertNotNull(CustomerDAO.findById(alex.getId()));
-
-
     }
+
 //    @Test
 //    public void deleteCustomerByIdV2() {
 //        Customer marie = new Customer("Marie");
@@ -93,8 +93,6 @@ public class AppTest {
 //        assertNull(CustomerDAO.findById(michel.getId()));
 //        assertNotNull(CustomerDAO.findById(marie.getId()));
 //        assertNotNull(CustomerDAO.findById(alex.getId()));
-//
-//
 //    }
 
     @Test
@@ -127,8 +125,9 @@ public class AppTest {
         assertEquals("Belmondo", updatedCustomer.getLastName());
 
     }
+
     @Test
-    public  void selectWhere(){
+    public void selectWhere(){
         Customer customer1 = new Customer();
         customer1.setFirstName("Alain");
         customer1.setLastName("Delon");
@@ -144,14 +143,21 @@ public class AppTest {
         customer3.setLastName("Dupont");
         CustomerDAO.create(customer3);
 
+        /*****************/
+
         List<Customer> alains = CustomerDAO.findByFirstName("Alain");
+
+        /*****************/
+
         assertEquals(2, alains.size());
+
         for(Customer c : alains){
             if(! c.getFirstName().equals("Alain")){
                 assertTrue(false);
             }
-
         }
-
     }
 }
+
+
+

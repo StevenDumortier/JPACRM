@@ -80,4 +80,5 @@ public class CustomerDAO {
         queryToFindCustomerByFirstName.setParameter("firstName", firstName);
         return queryToFindCustomerByFirstName.getResultList();
     }
+
 }
