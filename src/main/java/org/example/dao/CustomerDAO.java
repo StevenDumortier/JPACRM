@@ -72,8 +72,12 @@ public class CustomerDAO {
          } catch (Exception e){
             tx.rollback();
         }
+    }
+    public static List<Customer> findByFirstName(String firstName) {
+        EntityManager entityManager = EntityManagerSingleton.getEntityManager();
 
-
-
+        Query queryToFindCustomerByFirstName = entityManager.createQuery("select c from Customer c where c.firstName = :firstName");
+        queryToFindCustomerByFirstName.setParameter("firstName", firstName);
+        return queryToFindCustomerByFirstName.getResultList();
     }
 }
