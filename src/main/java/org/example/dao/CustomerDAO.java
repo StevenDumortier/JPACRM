@@ -56,8 +56,24 @@ public class CustomerDAO {
 //        deleteQuery.setParameter(1,id);
 //        deleteQuery.executeUpdate();
 //        tx.commit();
-//
-//
-//
 //    }
+    public static void update(Long id, Customer newCustomerDate) {
+        EntityManager entityManager = EntityManagerSingleton.getEntityManager();
+
+        Customer customerToUpdate = entityManager.find(Customer.class, id);
+        customerToUpdate.setNotNullData(newCustomerDate);
+        EntityTransaction tx = null;
+
+        try{
+            tx= entityManager.getTransaction();
+            tx.begin();
+            entityManager.merge(customerToUpdate);
+             tx.commit();
+         } catch (Exception e){
+            tx.rollback();
+        }
+
+
+
+    }
 }

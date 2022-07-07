@@ -96,4 +96,35 @@ public class AppTest {
 //
 //
 //    }
+
+    @Test
+    public void updateCustomer(){
+        Customer customer = new Customer();
+        customer.setFirstName("Alain");
+        customer.setLastName("Delon");
+        customer.setAddress("rue de la mairie");
+        customer.setCity("Paris");
+        customer.setCompanyName("Google");
+        customer.setCountry("France");
+        customer.setEmail("alain@delon.fr");
+        customer.setPhone("060606060606");
+        customer.setZipCode("75000");
+        customer.setState(1);
+        CustomerDAO.create(customer);
+
+        /*****************/
+
+        Customer newCustomerData = new Customer();
+        newCustomerData.setFirstName("Jean-Paul");
+        newCustomerData.setLastName("Belmondo");
+
+        CustomerDAO.update(customer.getId(), newCustomerData);
+
+        /*****************/
+
+        Customer updatedCustomer = CustomerDAO.findById(customer.getId());
+        assertEquals("Jean-Paul", updatedCustomer.getFirstName());
+        assertEquals("Belmondo", updatedCustomer.getLastName());
+
+    }
 }
